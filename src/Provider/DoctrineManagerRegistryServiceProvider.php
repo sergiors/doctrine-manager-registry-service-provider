@@ -6,7 +6,7 @@ use Silex\ServiceProviderInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
-use Inbep\Silex\Doctrine\ManagerRegistry;
+use Sergiors\Silex\Doctrine\ManagerRegistry;
 
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
