@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Doctrine;
+namespace Sergiors\Silex\Doctrine;
 
 use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\ORM\ORMException;

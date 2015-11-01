@@ -1,5 +1,5 @@
 {
-  "name": "inbep/doctrine-manager-registry-service-provider",
+  "name": "sergiors/doctrine-manager-registry-service-provider",
   "license": "MIT",
   "authors": [
     {
@@ -10,12 +10,12 @@
   "require": {
     "php": ">=5.5.9",
     "silex/silex": "~1.2",
-    "doctrine/orm": "~2.5",
-    "inbep/doctrine-orm-service-provider": "dev-master"
+    "sergiors/doctrine-cache-service-provider": "dev-master",
+    "sergiors/doctrine-orm-service-provider": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "Inbep\\Silex\\": "src"
+      "Sergiors\\Silex\\": "src"
     }
   },
   "require-dev": {
