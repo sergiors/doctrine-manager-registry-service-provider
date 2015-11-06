@@ -29,7 +29,14 @@ class ManagerRegistry extends AbstractManagerRegistry
         $defaultEntityManager
     ) {
         $this->setContainer($container);
-        parent::__construct('ORM', $connections, $entityManagers, $defaultConnection, $defaultEntityManager, 'Doctrine\ORM\Proxy\Proxy');
+        parent::__construct(
+            'ORM',
+            $connections,
+            $entityManagers,
+            $defaultConnection,
+            $defaultEntityManager,
+            'Doctrine\ORM\Proxy\Proxy'
+        );
     }
 
     /**

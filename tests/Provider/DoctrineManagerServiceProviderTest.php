@@ -14,6 +14,7 @@ class DoctrineManagerServiceProviderTest extends WebTestCase
     {
         $app = $this->createApplication();
         $app->register(new DoctrineServiceProvider());
+        $app->register(new DoctrineCacheServiceProvider());
         $app->register(new DoctrineOrmServiceProvider());
         $app->register(new DoctrineManagerRegistryServiceProvider());
     }
