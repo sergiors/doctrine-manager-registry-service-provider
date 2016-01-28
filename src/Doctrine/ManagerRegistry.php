@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\Doctrine;
 
 use Doctrine\Common\Persistence\AbstractManagerRegistry;

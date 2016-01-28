@@ -1,10 +1,10 @@
 <?php
+
 namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
-use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Sergiors\Silex\Doctrine\ManagerRegistry;
 
@@ -22,11 +22,13 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
 
             $connections = array_map(function ($name) use ($container, $dbs) {
                 $container['dbs.'.$name] = $dbs[$name];
+
                 return 'dbs.'.$name;
             }, $dbs->keys());
 
             $managers = array_map(function ($name) use ($container, $ems) {
                 $container['ems.'.$name] = $ems[$name];
+
                 return 'ems.'.$name;
             }, $ems->keys());
 
@@ -48,7 +50,7 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
         });
 
         $app['validator.validator_service_ids'] = [
-            'doctrine.orm.validator.unique' => 'validator.unique'
+            'doctrine.orm.validator.unique' => 'validator.unique',
         ];
 
         if (isset($app['form.extensions'])) {
