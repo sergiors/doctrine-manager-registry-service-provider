@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.5.9",
         "silex/silex": "~1.2",
-        "sergiors/doctrine-orm-service-provider": "dev-master"
+        "sergiors/doctrine-orm-service-provider": "1.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
