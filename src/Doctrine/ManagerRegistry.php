@@ -2,6 +2,7 @@
 
 namespace Sergiors\Silex\Doctrine;
 
+use Pimple\Container;
 use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\ORM\ORMException;
 
@@ -11,19 +12,19 @@ use Doctrine\ORM\ORMException;
 class ManagerRegistry extends AbstractManagerRegistry
 {
     /**
-     * @var \Pimple
+     * @var Container
      */
     protected $container;
 
     /**
-     * @param \Pimple $container
-     * @param array   $connections
-     * @param array   $entityManagers
-     * @param string  $defaultConnection
-     * @param string  $defaultEntityManager
+     * @param Container $container
+     * @param array     $connections
+     * @param array     $entityManagers
+     * @param string    $defaultConnection
+     * @param string    $defaultEntityManager
      */
     public function __construct(
-        \Pimple $container,
+        Container $container,
         array $connections,
         array $entityManagers,
         $defaultConnection,
@@ -59,7 +60,7 @@ class ManagerRegistry extends AbstractManagerRegistry
     /**
      * {@inheritdoc}
      */
-    public function setContainer(\Pimple $container = null)
+    public function setContainer(Container $container = null)
     {
         $this->container = $container;
     }
