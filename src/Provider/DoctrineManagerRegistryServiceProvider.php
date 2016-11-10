@@ -15,6 +15,12 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
+        if (!isset($app['validator'])) {
+            throw new \LogicException(
+                'You must register the ValidatorServiceProvider to use the DoctrineManagerRegistryServiceProvider.'
+            );
+        }
+
         $app['doctrine'] = function () use ($app) {
             $container = new Container();
             $ems = $app['ems'];
@@ -49,9 +55,9 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
             return new UniqueEntityValidator($app['doctrine']);
         };
 
-        $app['validator.validator_service_ids'] = [
+        $app['validator.validator_service_ids'] = array_merge($app['validator.validator_service_ids'], [
             'doctrine.orm.validator.unique' => 'validator.unique',
-        ];
+        ]);
 
         if (isset($app['form.extensions'])) {
             $app['form.extensions'] = $app->extend('form.extensions', function ($extensions) use ($app) {
