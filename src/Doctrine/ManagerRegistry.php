@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Silex\Doctrine;
+namespace Sergiors\Pimple\Doctrine;
 
 use Pimple\Container;
 use Doctrine\Common\Persistence\AbstractManagerRegistry;

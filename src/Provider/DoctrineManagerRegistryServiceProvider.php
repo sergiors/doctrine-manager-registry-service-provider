@@ -1,30 +1,30 @@
 <?php
 
-namespace Sergiors\Silex\Provider;
+namespace Sergiors\Pimple\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
-use Sergiors\Silex\Doctrine\ManagerRegistry;
+use Sergiors\Pimple\Doctrine\ManagerRegistry;
 
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
 {
-    public function register(Container $app)
+    public function register(Container $container)
     {
-        if (!isset($app['validator'])) {
+        if (!isset($container['validator'])) {
             throw new \LogicException(
                 'You must register the ValidatorServiceProvider to use the DoctrineManagerRegistryServiceProvider.'
             );
         }
 
-        $app['doctrine'] = function () use ($app) {
+        $container['doctrine'] = function () use ($container) {
             $container = new Container();
-            $ems = $app['ems'];
-            $dbs = $app['dbs'];
+            $ems = $container['ems'];
+            $dbs = $container['dbs'];
 
             $connections = array_map(function ($name) use ($container, $dbs) {
                 $container['dbs.'.$name] = $dbs[$name];
@@ -42,27 +42,27 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
                 $container,
                 $connections,
                 $managers,
-                $app['dbs.default'],
-                $app['ems.default']
+                $container['dbs.default'],
+                $container['ems.default']
             );
         };
 
-        $app['validator.unique'] = function () use ($app) {
+        $container['validator.unique'] = function () use ($container) {
             if (!class_exists('Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator')) {
                 return;
             }
 
-            return new UniqueEntityValidator($app['doctrine']);
+            return new UniqueEntityValidator($container['doctrine']);
         };
 
-        $app['validator.validator_service_ids'] = array_merge($app['validator.validator_service_ids'], [
+        $container['validator.validator_service_ids'] = array_merge($container['validator.validator_service_ids'], [
             'doctrine.orm.validator.unique' => 'validator.unique',
         ]);
 
-        if (isset($app['form.extensions'])) {
-            $app['form.extensions'] = $app->extend('form.extensions', function ($extensions) use ($app) {
+        if (isset($container['form.extensions'])) {
+            $container['form.extensions'] = $container->extend('form.extensions', function ($extensions) use ($container) {
                 if (class_exists('Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension')) {
-                    $extensions[] = new DoctrineOrmExtension($app['doctrine']);
+                    $extensions[] = new DoctrineOrmExtension($container['doctrine']);
                 }
 
                 return $extensions;
