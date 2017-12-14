@@ -22,10 +22,10 @@ class DoctrineManagerRegistryServiceProvider implements ServiceProviderInterface
         }
 
         $container['doctrine'] = function () use ($container) {
-            $container = new Container();
             $ems = $container['ems'];
             $dbs = $container['dbs'];
 
+            $container = new Container();
             $connections = array_map(function ($name) use ($container, $dbs) {
                 $container['dbs.'.$name] = $dbs[$name];
 
